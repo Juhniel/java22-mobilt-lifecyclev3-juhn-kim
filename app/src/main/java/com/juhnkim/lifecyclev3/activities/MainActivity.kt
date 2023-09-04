@@ -55,12 +55,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        super.onPrepareOptionsMenu(menu)
+        val menuItem = menu.findItem(R.id.action_second_activity)
+        menuItem.isVisible = false
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         return when (item.itemId) {
             R.id.action_login_activity -> {
                 startActivity(Intent(this, MainActivity::class.java))
