@@ -35,8 +35,6 @@ class SecondActivity : AppCompatActivity() {
             // Get a reference to Firestore database
             val db = FirestoreUtil.getInstance()
 
-            // Assuming you have the username of the currently logged-in user
-
             // Gather data
             val name = nameInput.text.toString()
             val fact = factInput.text.toString()

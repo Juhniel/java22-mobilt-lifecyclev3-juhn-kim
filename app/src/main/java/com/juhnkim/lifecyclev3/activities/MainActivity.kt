@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.juhnkim.lifecyclev3.R
@@ -44,11 +45,7 @@ class MainActivity : AppCompatActivity() {
                             return@addOnSuccessListener
                         }
                     }
-                    // If loop completes without returning, login failed
-                    // Handle login failure (e.g., show a Toast)
-                }
-                .addOnFailureListener { exception ->
-                    // Handle error (e.g., show a Toast)
+                        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
                 }
         }
 
