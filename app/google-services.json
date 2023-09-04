@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "786646424189",
+    "project_id": "lifecycle-22b91",
+    "storage_bucket": "lifecycle-22b91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786646424189:android:8d3ed25fb6041bbfaaef14",
+        "android_client_info": {
+          "package_name": "com.juhnkim.lifecyclev3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786646424189-ptbqd21nqf2lhr0svrknh2mng582ek9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD55wsd0pWYaX21NMZHLHBe09LaGqfBnfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786646424189-ptbqd21nqf2lhr0svrknh2mng582ek9r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
