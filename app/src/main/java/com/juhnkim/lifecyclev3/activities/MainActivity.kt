@@ -1,7 +1,9 @@
 package com.juhnkim.lifecyclev3.activities
 
 import FirestoreUtil
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,6 +15,9 @@ import androidx.appcompat.widget.Toolbar
 import com.juhnkim.lifecyclev3.R
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +30,18 @@ class MainActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.login_button)
         val registerButton = findViewById<Button>(R.id.register_button)
         val db = FirestoreUtil.getInstance();
+
+        sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+
+        // Restore saved EditText values from Shared Preferences
+        username.setText(sharedPreferences.getString("username", ""))
+        password.setText(sharedPreferences.getString("password", ""))
+
+        // Restore saved EditText values from savedInstanceState
+        savedInstanceState?.let {
+            username.setText(it.getString("username", ""))
+            password.setText(it.getString("password", ""))
+        }
 
         loginButton.setOnClickListener {
             val enteredUsername = username.text.toString()
@@ -86,5 +103,24 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val editor = sharedPreferences.edit()
+
+        // Save EditText content to Shared Preferences
+        editor.putString("username", findViewById<EditText>(R.id.username).text.toString())
+        editor.putString("password", findViewById<EditText>(R.id.password).text.toString())
+
+        editor.apply()
+    }
+
+    // Save EditText content to Bundle
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("username", findViewById<EditText>(R.id.username).text.toString())
+        outState.putString("password", findViewById<EditText>(R.id.password).text.toString())
     }
 }

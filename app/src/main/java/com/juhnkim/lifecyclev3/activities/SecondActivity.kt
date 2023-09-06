@@ -32,7 +32,6 @@ class SecondActivity : AppCompatActivity() {
 
         // Submit fact button
         submitButton.setOnClickListener {
-            // Get a reference to Firestore database
             val db = FirestoreUtil.getInstance()
 
             // Gather data
