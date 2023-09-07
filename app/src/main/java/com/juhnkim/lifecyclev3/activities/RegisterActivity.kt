@@ -42,6 +42,9 @@ class RegisterActivity : AppCompatActivity() {
                 .set(user)
                 .addOnSuccessListener {
                     Log.d(TAG, "DocumentSnapshot successfully written!")
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("accountCreated", true)
+                    startActivity(intent)
                 }
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error writing document", e)
@@ -63,18 +66,17 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 true
             }
-            R.id.action_register_activity -> {
-                startActivity(Intent(this, RegisterActivity::class.java))
-                true
-            }
+
             R.id.action_second_activity -> {
                 startActivity(Intent(this, SecondActivity::class.java))
                 true
             }
+
             R.id.action_fact_activity -> {
                 startActivity(Intent(this, FactActivity::class.java))
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

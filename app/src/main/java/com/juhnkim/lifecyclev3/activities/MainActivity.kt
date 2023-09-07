@@ -22,26 +22,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Setup toolbar
         val toolbar: Toolbar = findViewById(R.id.my_toolbar)
         setSupportActionBar(toolbar)
 
+        // Toast for account created
+        val accountCreated = intent.getBooleanExtra("accountCreated", false)
+        if (accountCreated) {
+            Toast.makeText(this, "Account successfully created", Toast.LENGTH_LONG).show()
+        }
+
+        // Initialize UI elements
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val loginButton = findViewById<Button>(R.id.login_button)
         val registerButton = findViewById<Button>(R.id.register_button)
+
+        // Initialize Firestore instance
         val db = FirestoreUtil.getInstance();
 
-        sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("UserCredentials", Context.MODE_PRIVATE)
 
         // Restore saved EditText values from Shared Preferences
         username.setText(sharedPreferences.getString("username", ""))
         password.setText(sharedPreferences.getString("password", ""))
-
-        // Restore saved EditText values from savedInstanceState
-        savedInstanceState?.let {
-            username.setText(it.getString("username", ""))
-            password.setText(it.getString("password", ""))
-        }
 
         loginButton.setOnClickListener {
             val enteredUsername = username.text.toString()
@@ -62,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                             return@addOnSuccessListener
                         }
                     }
-                        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
                 }
         }
 
@@ -71,7 +75,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -85,22 +88,22 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return when (item.itemId) {
-            R.id.action_login_activity -> {
-                startActivity(Intent(this, MainActivity::class.java))
-                true
-            }
+
             R.id.action_register_activity -> {
                 startActivity(Intent(this, RegisterActivity::class.java))
                 true
             }
+
             R.id.action_second_activity -> {
                 startActivity(Intent(this, SecondActivity::class.java))
                 true
             }
+
             R.id.action_fact_activity -> {
                 startActivity(Intent(this, FactActivity::class.java))
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -115,12 +118,5 @@ class MainActivity : AppCompatActivity() {
         editor.putString("password", findViewById<EditText>(R.id.password).text.toString())
 
         editor.apply()
-    }
-
-    // Save EditText content to Bundle
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString("username", findViewById<EditText>(R.id.username).text.toString())
-        outState.putString("password", findViewById<EditText>(R.id.password).text.toString())
     }
 }

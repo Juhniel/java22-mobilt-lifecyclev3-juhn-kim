@@ -18,6 +18,8 @@ class FactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fact)
+
+        // Setup toolbar
         val toolbar: Toolbar = findViewById(R.id.my_toolbar)
         setSupportActionBar(toolbar)
 
@@ -64,18 +66,17 @@ class FactActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 true
             }
+
             R.id.action_register_activity -> {
                 startActivity(Intent(this, RegisterActivity::class.java))
                 true
             }
+
             R.id.action_second_activity -> {
                 startActivity(Intent(this, SecondActivity::class.java))
                 true
             }
-            R.id.action_fact_activity -> {
-                startActivity(Intent(this, FactActivity::class.java))
-                true
-            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

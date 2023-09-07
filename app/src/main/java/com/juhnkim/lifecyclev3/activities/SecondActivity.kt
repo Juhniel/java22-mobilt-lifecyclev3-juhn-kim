@@ -53,7 +53,10 @@ class SecondActivity : AppCompatActivity() {
             db.collection("facts")
                 .add(userInfo)
                 .addOnSuccessListener { documentReference ->
-                    Log.d("SecondActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
+                    Log.d(
+                        "SecondActivity",
+                        "DocumentSnapshot added with ID: ${documentReference.id}"
+                    )
                 }
                 .addOnFailureListener { e ->
                     Log.w("SecondActivity", "Error adding document", e)
@@ -75,18 +78,18 @@ class SecondActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 true
             }
+
             R.id.action_register_activity -> {
                 startActivity(Intent(this, RegisterActivity::class.java))
                 true
             }
-            R.id.action_second_activity -> {
-                startActivity(Intent(this, SecondActivity::class.java))
-                true
-            }
+
+
             R.id.action_fact_activity -> {
                 startActivity(Intent(this, FactActivity::class.java))
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

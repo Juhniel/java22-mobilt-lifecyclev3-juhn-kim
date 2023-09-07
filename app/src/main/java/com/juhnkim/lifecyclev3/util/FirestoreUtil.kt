@@ -8,7 +8,6 @@ object FirestoreUtil {
     fun getInstance(): FirebaseFirestore {
         if (instance == null) {
             instance = FirebaseFirestore.getInstance()
-            // Configure the instance if needed
         }
         return instance!!
     }
